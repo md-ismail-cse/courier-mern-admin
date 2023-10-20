@@ -248,11 +248,11 @@ a {
 .css-t89xny-MuiDataGrid-columnHeaderTitle {
   font-weight: bold !important;
 }
-.css-5wly58-MuiDataGrid-root .MuiDataGrid-cell:focus {
+.MuiDataGrid-cell:focus {
   outline: none !important;
 }
-.css-5wly58-MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
-.css-5wly58-MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+.MuiDataGrid-columnHeader:focus-within,
+.MuiDataGrid-cell:focus-within {
   outline: none !important;
 }
 .tableLink a {
@@ -406,9 +406,9 @@ span.Delivered {
   vertical-align: top;
 }
 .profileBox table .MuiAvatar-circular {
-  height: 100px;
-  width: 100px;
-  margin: 7px auto;
+  height: 100px !important;
+  width: 100px !important;
+  margin: 7px auto !important;
 }
 .profileBox table th {
   text-align: right;
@@ -453,8 +453,8 @@ span.Delivered {
   text-align: center;
 }
 .singleParcel .parcelInner .parcelBox .profileBox .MuiAvatar-circular {
-  width: 70px;
-  height: 70px;
+  width: 70px !important;
+  height: 70px !important;
 }
 /* Parcels Page End */
 
