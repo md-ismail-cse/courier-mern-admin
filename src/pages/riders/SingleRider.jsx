@@ -40,7 +40,11 @@ const SingleRider = () => {
                         {rider.thumb ? (
                           <Avatar
                             alt={rider.name}
-                            src={"/riders/" + rider.thumb}
+                            src={
+                              process.env.REACT_APP_SERVER +
+                              "/riders/" +
+                              rider.thumb
+                            }
                           />
                         ) : (
                           <Avatar alt={rider.name} src="/img/placeholder.png" />
