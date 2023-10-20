@@ -1,0 +1,122 @@
+@media screen and (max-width: 1400px) {
+  /* Perfect all */
+}
+@media screen and (max-width: 1200px) {
+  /* Perfect all */
+}
+@media screen and (max-width: 1024px) {
+  .dashboardItems {
+    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-box {
+    width: 70%;
+  }
+  .singleParcel .content .parcelInner {
+    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .singleParcel .content .parcelInner .parcelBox {
+    padding: 5px;
+    overflow: hidden;
+  }
+  .singleParcel .content .parcelInner .profileBox table th,
+  .singleParcel .content .parcelInner .profileBox table td {
+    padding: 5px 8px;
+  }
+  .singleParcel .content .parcelInner .parcelBox h4 {
+    margin-left: 36%;
+    transform: translateX(-36%);
+  }
+  .singleRider .content,
+  .singleCustomer .content {
+    grid-template-columns: 1fr;
+  }
+  .singleRider .profileBox,
+  .singleCustomer .profileBox {
+    width: fit-content;
+    margin: 0 auto;
+  }
+  .profile .css-11qr2p8-MuiButtonBase-root-MuiButton-root {
+    margin-bottom: 5px;
+  }
+  .singleContact .content {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .menuContainer .logo img:first-of-type {
+    display: none;
+  }
+  .menuContainer .logo img:last-of-type {
+    display: block;
+    height: 35px;
+  }
+
+  .listItemTitle {
+    display: none;
+  }
+  .menuContainer {
+    width: fit-content;
+    padding: 5px 10px;
+  }
+  .navbar {
+    width: calc(100% - 75px);
+    padding: 10px 0;
+    margin-left: 65px;
+  }
+  .navbar .icons {
+    margin-right: 15px;
+  }
+  .contentContainer {
+    padding: 10px;
+    width: calc(100% - 75px);
+    margin-left: 65px;
+  }
+  .dashboardItems {
+    gap: 10px;
+  }
+  .singleItem {
+    padding: 15px;
+  }
+  .itemIcon {
+    font-size: 25px;
+    width: 60px;
+    height: 60px;
+    padding: 13px 0px;
+  }
+  .footer {
+    width: calc(100% - 75px);
+    margin-left: 65px;
+  }
+  .main-title {
+    padding-bottom: 15px;
+  }
+  .main-title h2 {
+    font-size: 20px;
+  }
+  .heading-border {
+    margin-top: 5px;
+  }
+  .form-box {
+    width: 100%;
+  }
+  .singleParcel .content .parcelInner {
+    gap: 15px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .dashboardItems {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .btnPrimary {
+    padding: 5px 25px !important;
+  }
+  .navbar .icons i {
+    font-size: 15px;
+  }
+  .navbar .user span {
+    display: none;
+  }
+}
