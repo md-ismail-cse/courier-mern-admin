@@ -318,6 +318,9 @@ span.Delivered {
 /* Data Table End */
 
 /* Form Start */
+.form>div {
+    margin-bottom: 15px!important;
+}
 .form-box .css-wb57ya-MuiFormControl-root-MuiTextField-root,
 .css-q8hpuo-MuiFormControl-root {
   margin-bottom: 15px !important;
