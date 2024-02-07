@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
 
 const PriceTable = () => {
   // GET PRICES
@@ -13,7 +13,12 @@ const PriceTable = () => {
   useEffect(() => {
     const fatchPrices = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/prices"
+        process.env.REACT_APP_SERVER + "/api/admin/prices",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setPrices(data);
       setLoading(true);
@@ -32,7 +37,11 @@ const PriceTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(process.env.REACT_APP_SERVER + `/api/admin/prices/${id}`)
+          .delete(process.env.REACT_APP_SERVER + `/api/admin/prices/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem("aToken"),
+            },
+          })
           .catch((error) => {
             Swal.fire({
               icon: "error",
@@ -59,6 +68,12 @@ const PriceTable = () => {
       field: "endLocation",
       headerName: "End location",
       width: 150,
+    },
+    {
+      field: "duration",
+      headerName: "Duration",
+      width: 150,
+      valueGetter: (params) => `${params.row.duration} Days`,
     },
     {
       field: "price",

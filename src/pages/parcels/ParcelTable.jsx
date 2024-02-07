@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
 
 const ParcelTable = () => {
   // GET PARCELS
@@ -13,7 +13,12 @@ const ParcelTable = () => {
   useEffect(() => {
     const fatchParcels = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/parcels"
+        process.env.REACT_APP_SERVER + "/api/admin/parcels",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setParcels(data);
       setLoading(true);
@@ -33,7 +38,11 @@ const ParcelTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(process.env.REACT_APP_SERVER + `/api/admin/parcels/${id}`)
+          .delete(process.env.REACT_APP_SERVER + `/api/admin/parcels/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem("aToken"),
+            },
+          })
           .catch((error) => {
             Swal.fire({
               icon: "error",
@@ -103,10 +112,26 @@ const ParcelTable = () => {
     {
       field: "recPhone",
       headerName: "recPhone",
+      renderCell: (params) => {
+        return (
+          <div className="tableLink">
+            <Link to={"tel:" + params.row.recPhone}>{params.row.recPhone}</Link>
+          </div>
+        );
+      },
     },
     {
       field: "recEmail",
       headerName: "recEmail",
+      renderCell: (params) => {
+        return (
+          <div className="tableLink">
+            <Link to={"mailto:" + params.row.recEmail}>
+              {params.row.recEmail}
+            </Link>
+          </div>
+        );
+      },
     },
     {
       field: "recAddress",

@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
 
 const BranchTable = () => {
   // GET BRANCHES
@@ -13,7 +13,12 @@ const BranchTable = () => {
   useEffect(() => {
     const fatchBranches = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/branches"
+        process.env.REACT_APP_SERVER + "/api/admin/branches",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setBranches(data);
       setLoading(true);
@@ -32,7 +37,11 @@ const BranchTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(process.env.REACT_APP_SERVER + `/api/admin/branches/${id}`)
+          .delete(process.env.REACT_APP_SERVER + `/api/admin/branches/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem("aToken"),
+            },
+          })
           .catch((error) => {
             Swal.fire({
               icon: "error",

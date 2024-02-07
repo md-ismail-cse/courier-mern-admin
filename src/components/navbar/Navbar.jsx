@@ -7,7 +7,12 @@ const Navbar = () => {
   useEffect(() => {
     const fatchParcels = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/parcels"
+        process.env.REACT_APP_SERVER + "/api/admin/parcels",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       const newParcles = data.filter((curData) => {
         return curData.status !== "Delivered";
@@ -22,7 +27,12 @@ const Navbar = () => {
   useEffect(() => {
     const fatchContacts = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/contacts"
+        process.env.REACT_APP_SERVER + "/api/admin/contacts",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       const newContacts = data.filter((curData) => {
         return curData.read === "No";
@@ -38,7 +48,12 @@ const Navbar = () => {
   useEffect(() => {
     const fatchAdmin = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`
+        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setAdmin(data);
     };
@@ -77,7 +92,7 @@ const Navbar = () => {
                   alt={admin.name}
                 />
               ) : (
-                <img src={"/img/placeholder.png"} alt={admin.name} />
+                <img src="/img/placeholder.png" alt={admin.name} />
               )}
               <span>{admin.name}</span>
             </div>

@@ -1,8 +1,8 @@
 import { Avatar, Button } from "@mui/material";
-import Title from "../../components/title/Title";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
+import Title from "../../components/title/Title";
 
 const Profile = () => {
   // Get current logged admin
@@ -12,7 +12,12 @@ const Profile = () => {
   useEffect(() => {
     const fatchAdmin = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`
+        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setAdmin(data);
       setLoading(true);
@@ -50,6 +55,10 @@ const Profile = () => {
                   <tr>
                     <th>Phone:</th>
                     <td>{admin.phone}</td>
+                  </tr>
+                  <tr>
+                    <th>Gender:</th>
+                    <td>{admin.gender}</td>
                   </tr>
                   <tr>
                     <th>Address:</th>

@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import Title from "../../components/title/Title";
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import Loader from "../../components/loader/Loader";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
+import Title from "../../components/title/Title";
 
 const SingleContact = () => {
   const { id } = useParams();
@@ -13,7 +13,12 @@ const SingleContact = () => {
   useEffect(() => {
     const fatchContact = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`
+        process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setContact(data);
       setLoading(true);
@@ -33,7 +38,11 @@ const SingleContact = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`)
+          .delete(process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem("aToken"),
+            },
+          })
           .then(() => (window.location.href = "/contacts"))
           .catch((error) => {
             Swal.fire({

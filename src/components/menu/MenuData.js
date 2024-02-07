@@ -15,7 +15,7 @@ export const menu = [
     id: 3,
     path: "/prices",
     icon: "ri-money-dollar-circle-line",
-    title: "Delivery Cost",
+    title: "Delivery Charge",
   },
   {
     id: 4,

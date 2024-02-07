@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
 
 const ContactTable = () => {
   // GET CONTACT
@@ -13,7 +13,12 @@ const ContactTable = () => {
   useEffect(() => {
     const fatchContacts = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/contacts"
+        process.env.REACT_APP_SERVER + "/api/admin/contacts",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setContacts(data);
       setLoading(true);
@@ -33,7 +38,11 @@ const ContactTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`)
+          .delete(process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem("aToken"),
+            },
+          })
           .catch((error) => {
             Swal.fire({
               icon: "error",
@@ -51,6 +60,7 @@ const ContactTable = () => {
       .put(process.env.REACT_APP_SERVER + `/api/admin/contacts/${id}`, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: localStorage.getItem("aToken"),
         },
       })
       .then((response) => {

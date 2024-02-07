@@ -16,7 +16,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchParcels = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/parcels"
+        process.env.REACT_APP_SERVER + "/api/admin/parcels",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setParcels(data.length);
     };
@@ -27,7 +32,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchContacts = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/contacts"
+        process.env.REACT_APP_SERVER + "/api/admin/contacts",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setContacts(data.length);
     };
@@ -38,7 +48,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchCustomers = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/customers"
+        process.env.REACT_APP_SERVER + "/api/admin/customers",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setCustomers(data.length);
     };
@@ -49,7 +64,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchBranches = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/branches"
+        process.env.REACT_APP_SERVER + "/api/admin/branches",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setBranches(data.length);
     };
@@ -60,7 +80,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchRiders = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/riders"
+        process.env.REACT_APP_SERVER + "/api/admin/riders",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setRiders(data.length);
     };
@@ -71,7 +96,12 @@ const HomeItems = () => {
   useEffect(() => {
     const fatchAdmin = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/admin"
+        process.env.REACT_APP_SERVER + "/api/admin/admin",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setAdmin(data.length);
       setLoading(true);

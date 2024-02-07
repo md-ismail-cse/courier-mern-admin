@@ -14,7 +14,12 @@ const RiderParcels = () => {
   useEffect(() => {
     const fatchPrices = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/parcels"
+        process.env.REACT_APP_SERVER + "/api/admin/parcels",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       const newParcels = data.filter((curData) => {
         return curData.picRiderID === id || curData.dlvRiderID === id;

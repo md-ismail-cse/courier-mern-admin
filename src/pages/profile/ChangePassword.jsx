@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import Title from "../../components/title/Title";
 import {
   FormControl,
   IconButton,
@@ -8,8 +6,10 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Loader from "../../components/loader/Loader";
+import Title from "../../components/title/Title";
 
 const ChangePassword = () => {
   // MUI show password functionality
@@ -41,7 +41,12 @@ const ChangePassword = () => {
   useEffect(() => {
     const fatchAdmin = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`
+        process.env.REACT_APP_SERVER + `/api/admin/admin/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setThumb(data.thumb);
       setEmail(data.email);
@@ -67,6 +72,7 @@ const ChangePassword = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("aToken"),
             },
           }
         )

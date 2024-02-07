@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Title from "../../components/title/Title";
 import { TextField } from "@mui/material";
 import axios from "axios";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
+import Title from "../../components/title/Title";
 
 const AddBranch = () => {
   const [branch, setBranch] = useState("");
@@ -17,6 +17,7 @@ const AddBranch = () => {
       .post(process.env.REACT_APP_SERVER + "/api/admin/branches", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: localStorage.getItem("aToken"),
         },
       })
       .then((response) => {

@@ -77,6 +77,10 @@ a {
 .bold {
   font-weight: bold;
 }
+.note {
+  font-size: 12px;
+  color: #7b7a7a;
+}
 /* Common CSS End */
 
 /* Sidebar Menu Start */
@@ -248,11 +252,11 @@ a {
 .css-t89xny-MuiDataGrid-columnHeaderTitle {
   font-weight: bold !important;
 }
-.MuiDataGrid-cell:focus {
+.css-5wly58-MuiDataGrid-root .MuiDataGrid-cell:focus {
   outline: none !important;
 }
-.MuiDataGrid-columnHeader:focus-within,
-.MuiDataGrid-cell:focus-within {
+.css-5wly58-MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
+.css-5wly58-MuiDataGrid-root .MuiDataGrid-cell:focus-within {
   outline: none !important;
 }
 .tableLink a {
@@ -314,15 +318,15 @@ span.Delivered {
 /* Data Table End */
 
 /* Form Start */
-.form > div {
+.form-box .css-wb57ya-MuiFormControl-root-MuiTextField-root,
+.css-q8hpuo-MuiFormControl-root {
   margin-bottom: 15px !important;
 }
-.MuiButton-sizeSmall {
+.css-11qr2p8-MuiButtonBase-root-MuiButton-root {
   background: #09b5e4 !important;
   margin-right: 10px !important;
-  margin-bottom: 5px !important;
 }
-.MuiFormHelperText-sizeMedium {
+.css-1wc848c-MuiFormHelperText-root {
   color: #09b5e4 !important;
 }
 .form-box {
@@ -405,13 +409,14 @@ span.Delivered {
   text-align: left;
   vertical-align: top;
 }
-.profileBox table .MuiAvatar-circular {
-  height: 100px !important;
-  width: 100px !important;
-  margin: 7px auto !important;
+.profileBox table .css-1wlk0hk-MuiAvatar-root {
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
 }
 .profileBox table th {
   text-align: right;
+  width: 40%;
 }
 /* Profile Page End*/
 
@@ -452,9 +457,9 @@ span.Delivered {
 .singleParcel .content .parcelInner .parcelBox .form-box .profileBox table td {
   text-align: center;
 }
-.singleParcel .parcelInner .parcelBox .profileBox .MuiAvatar-circular {
-  width: 70px !important;
-  height: 70px !important;
+.singleParcel .parcelInner .parcelBox .profileBox .css-1wlk0hk-MuiAvatar-root {
+  width: 70px;
+  height: 70px;
 }
 /* Parcels Page End */
 

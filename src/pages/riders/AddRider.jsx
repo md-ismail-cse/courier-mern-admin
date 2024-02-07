@@ -1,13 +1,14 @@
-import { useState } from "react";
-import Title from "../../components/title/Title";
-import { TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import axios from "axios";
+import { useState } from "react";
 import Swal from "sweetalert2";
+import Title from "../../components/title/Title";
 
 const AddRider = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
   const [address, setAddress] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
@@ -15,12 +16,14 @@ const AddRider = () => {
       name,
       email,
       phone,
+      gender,
       address,
     };
     axios
       .post(process.env.REACT_APP_SERVER + "/api/admin/riders", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: localStorage.getItem("aToken"),
         },
       })
       .then((response) => {
@@ -91,10 +94,22 @@ const AddRider = () => {
               <TextField
                 required
                 fullWidth
+                select
+                label="Gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+              </TextField>
+              <TextField
+                required
+                fullWidth
                 label="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
+
               <input type="submit" className="btnPrimary" />
             </form>
           </div>

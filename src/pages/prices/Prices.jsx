@@ -6,7 +6,7 @@ const Prices = () => {
   return (
     <>
       <div className="prices">
-        <Title title="Delivery Cost" />
+        <Title title="Delivery charge" />
         <div className="content">
           <Button
             href="/prices/add-price"
@@ -14,7 +14,7 @@ const Prices = () => {
             variant="contained"
             size="small"
           >
-            Add new delivery cost
+            Add new delivery charge
           </Button>
           <PriceTable />
         </div>

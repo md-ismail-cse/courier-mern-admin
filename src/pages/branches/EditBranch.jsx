@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Title from "../../components/title/Title";
 import { TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import Loader from "../../components/loader/Loader";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
+import Title from "../../components/title/Title";
 
 const EditBranch = () => {
   const { id } = useParams();
@@ -14,7 +14,12 @@ const EditBranch = () => {
   useEffect(() => {
     const fatchBranch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + `/api/admin/branches/${id}`
+        process.env.REACT_APP_SERVER + `/api/admin/branches/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setBranch(data.branch);
       setAddress(data.address);
@@ -36,6 +41,7 @@ const EditBranch = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: localStorage.getItem("aToken"),
           },
         }
       )

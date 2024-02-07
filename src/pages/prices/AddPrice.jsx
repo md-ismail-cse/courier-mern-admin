@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Title from "../../components/title/Title";
 import { InputAdornment, MenuItem, TextField } from "@mui/material";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Loader from "../../components/loader/Loader";
+import Title from "../../components/title/Title";
 
 const AddPrice = () => {
   // GET BRANCHES
@@ -12,7 +12,12 @@ const AddPrice = () => {
   useEffect(() => {
     const fatchBranches = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/branches"
+        process.env.REACT_APP_SERVER + "/api/admin/branches",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setBranches(data);
       setLoading(true);
@@ -22,6 +27,7 @@ const AddPrice = () => {
 
   const [sendLocation, setSendLocation] = useState("");
   const [endLocation, setEndLocation] = useState("");
+  const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
 
   const submitHandler = (e) => {
@@ -29,12 +35,14 @@ const AddPrice = () => {
     let data = {
       sendLocation,
       endLocation,
+      duration,
       price,
     };
     axios
       .post(process.env.REACT_APP_SERVER + "/api/admin/prices", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: localStorage.getItem("aToken"),
         },
       })
       .then((response) => {
@@ -65,7 +73,7 @@ const AddPrice = () => {
   return (
     <>
       <div className="addPrice">
-        <Title title="Add delivery cost" />
+        <Title title="Add delivery charge" />
         <div className="content">
           <div className="form-box">
             {laoding ? (
@@ -101,16 +109,26 @@ const AddPrice = () => {
                 <TextField
                   required
                   fullWidth
+                  label="Duration"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">Day</InputAdornment>
+                    ),
+                  }}
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                />
+                <TextField
+                  required
+                  fullWidth
                   label="Price"
                   type="number"
-                  InputProps={
-                    ({ inputProps: { min: 0 } },
-                    {
-                      startAdornment: (
-                        <InputAdornment position="start">৳</InputAdornment>
-                      ),
-                    })
-                  }
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">৳</InputAdornment>
+                    ),
+                  }}
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />

@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
 import Swal from "sweetalert2";
+import Loader from "../../components/loader/Loader";
 
 const CustomerTable = () => {
   // GET RIDERS
@@ -13,7 +13,12 @@ const CustomerTable = () => {
   useEffect(() => {
     const fatchCustomers = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER + "/api/admin/customers"
+        process.env.REACT_APP_SERVER + "/api/admin/customers",
+        {
+          headers: {
+            Authorization: localStorage.getItem("aToken"),
+          },
+        }
       );
       setCustomers(data);
       setLoading(true);
@@ -34,7 +39,12 @@ const CustomerTable = () => {
         axios
           .delete(
             process.env.REACT_APP_SERVER +
-              `/api/admin/customers/${id}?thumb=${thumb}`
+              `/api/admin/customers/${id}?thumb=${thumb}`,
+            {
+              headers: {
+                Authorization: localStorage.getItem("aToken"),
+              },
+            }
           )
           .catch((error) => {
             Swal.fire({
@@ -79,11 +89,30 @@ const CustomerTable = () => {
       field: "email",
       headerName: "Email",
       width: 150,
+      renderCell: (params) => {
+        return (
+          <div className="tableLink">
+            <Link to={"mailto:" + params.row.email}>{params.row.email}</Link>
+          </div>
+        );
+      },
     },
     {
       field: "phone",
       headerName: "Phone",
       width: 150,
+      renderCell: (params) => {
+        return (
+          <div className="tableLink">
+            <Link to={"tel:" + params.row.phone}>{params.row.phone}</Link>
+          </div>
+        );
+      },
+    },
+    {
+      field: "gender",
+      headerName: "Gender",
+      width: 80,
     },
     {
       field: "address",
